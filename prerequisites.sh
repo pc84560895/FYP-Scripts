@@ -5,7 +5,7 @@ wget -qO- https://get.docker.com/ | sh
 
 #create a main directory
 mkdir ~/HOSTTools
-cd HOSTTools
+cd ~/HOSTTools
 
 # masscan
 git clone https://github.com/robertdavidgraham/masscan
@@ -16,11 +16,6 @@ mv bin/masscan /usr/bin
 
 # nmap
 apt-get install nmap -y
-
-# create directory for docker images
-cd ~/HOSTTools
-mkdir dockerimages
-cd dockerimages
 
 # cowrie docker file
 docker pull ouspg/cowrie
