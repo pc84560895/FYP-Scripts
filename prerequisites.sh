@@ -3,12 +3,14 @@
 #docker
 wget -qO- https://get.docker.com/ | sh
 
-#masscan
-mkdir HOSTTools
+#create a main directory
+mkdir ~/HOSTTools
 cd HOSTTools
+
+# masscan
 git clone https://github.com/robertdavidgraham/masscan
 cd masscan
-make
+make -j
 make regress
 mv bin/masscan /usr/bin
 
