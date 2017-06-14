@@ -10,7 +10,7 @@ cd HOSTTools
 # masscan
 git clone https://github.com/robertdavidgraham/masscan
 cd masscan
-make -j
+make
 make regress
 mv bin/masscan /usr/bin
 
