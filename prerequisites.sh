@@ -16,6 +16,8 @@ mv bin/masscan /usr/bin
 
 # nmap
 apt-get install nmap -y
+cd ~/HOSTTools
+mkdir nmap
 
 # cowrie docker file
 docker pull ouspg/cowrie
