@@ -13,3 +13,5 @@ docker pull ouspg/cowrie
 # kippo docker file
 docker pull tomdesinto/kippo
 
+# create database for filtered logs
+python ~/FYP-Scripts/honeypotlogsdb.py
