@@ -17,8 +17,8 @@ python honeypotlogsdb.py
 rm honeypotlogsdb.py
 
 # cowrie docker file
-docker pull ouspg/cowrie
+#docker pull ouspg/cowrie
 
 # kippo docker file
-docker pull tomdesinto/kippo
+#docker pull tomdesinto/kippo
 
