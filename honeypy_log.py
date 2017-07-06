@@ -2,9 +2,16 @@ import os, time, MySQLdb, hashlib, re
 import settings
 
 filepattern = r'^honeypy.log(\..*)?$'
-path = '/home/user/Desktop'
+path = '/var/lib/docker/volumes/Deployment_159/_data'
 dockerid = '49045bb57ba386496d0e500ae2df694faba4db24cc3092050c02608d017dfa41'
-	
+
+def insertIntoDB(sql):
+	db = MySQLdb.connect(host=settings.DB_HOST,port=settings.DB_PORT,user=settings.DB_USER,passwd=settings.DB_PASSWORD,db=settings.DB_DEFAULT)
+	cur = db.cursor()
+	cur.execute(sql)
+	db.commit()
+	db.close()
+
 files = []
 listdir = os.listdir(path)
 for i in listdir:
@@ -15,12 +22,12 @@ for i in listdir:
 all_ids = []
 
 sql = 'INSERT IGNORE INTO Honeypot (id,docker,timestamp,remote_ip,remote_port,local_ip,local_port,protocol) VALUES '
-
-counter = 0
 		
 for f in files:
 	with open(f,'r') as file:
-		for line in file:
+		values = ''
+		
+		for i,line in enumerate(file):
 			data = {
 				'docker': dockerid
 			}
@@ -50,17 +57,12 @@ for f in files:
 				if hash not in all_ids:
 					data['id'] = hash
 					s = '(\'{id}\', \'{docker}\', \'{timestamp}\', \'{r_ip}\', {r_port} ,\'{l_ip}\', {l_port},\'{protocol}\'),'.format(**data)
-					sql += s
-					if counter == 10000:
-						sql = sql[:-1]
-						db = MySQLdb.connect(host=settings.DB_HOST,port=settings.DB_PORT,user=settings.DB_USER,passwd=settings.DB_PASSWORD,db=settings.DB_DEFAULT)
-						cur = db.cursor()
-						cur.execute(sql)
-						db.commit()
-						db.close()
-						sql = "INSERT IGNORE INTO Honeypot (id,docker,timestamp,remote_ip,remote_port,local_ip,local_port,protocol) VALUES "
-						counter = 0						
-					counter += 1
-					print(counter)
-
-
+					values += s
+					if (i % 10000) == 0:
+						insert = sql + values[:-1]
+						insertIntoDB(insert)
+						values = ''
+						
+		if values:						
+			insert = sql + values[:-1]
+			insertIntoDB(insert)
