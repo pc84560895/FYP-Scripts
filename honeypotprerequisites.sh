@@ -12,9 +12,12 @@ mkdir honeypots
 cd honeypots
 
 #create database for filtered logs
-cp ~/FYP-Scripts/honeypotlogsdb.py .
-python honeypotlogsdb.py
-rm honeypotlogsdb.py
+#cp ~/FYP-Scripts/honeypotlogsdb.py .
+#python honeypotlogsdb.py
+#rm honeypotlogsdb.py
+
+#Install MySQL-python
+pip install MySQL-python
 
 # cowrie docker file
 #docker pull ouspg/cowrie
