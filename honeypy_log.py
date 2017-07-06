@@ -19,8 +19,6 @@ for i in listdir:
 		f = '{}/{}'.format(path,i)
 		files.append(f)
 
-all_ids = []
-
 sql = 'INSERT IGNORE INTO Honeypot (id,docker,timestamp,remote_ip,remote_port,local_ip,local_port,protocol) VALUES '
 		
 for f in files:
@@ -54,14 +52,14 @@ for f in files:
 					data['l_port'] = parts[8]
 					data['protocol'] = parts[5]
 					
-				if hash not in all_ids:
-					data['id'] = hash
-					s = '(\'{id}\', \'{docker}\', \'{timestamp}\', \'{r_ip}\', {r_port} ,\'{l_ip}\', {l_port},\'{protocol}\'),'.format(**data)
-					values += s
-					if (i % 10000) == 0:
-						insert = sql + values[:-1]
-						insertIntoDB(insert)
-						values = ''
+				data['id'] = hash
+				s = '(\'{id}\', \'{docker}\', \'{timestamp}\', \'{r_ip}\', {r_port} ,\'{l_ip}\', {l_port},\'{protocol}\'),'.format(**data)
+				values += s
+				
+				if (i > 0 and i % 5000) == 0:
+					insert = sql + values[:-1]
+					insertIntoDB(insert)
+					values = ''
 						
 		if values:						
 			insert = sql + values[:-1]
