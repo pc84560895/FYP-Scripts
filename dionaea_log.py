@@ -50,7 +50,7 @@ for i,row in enumerate(cursor):
 	s = '(\'{id}\', \'{docker}\', \'{timestamp}\', \'{r_ip}\', {r_port} ,\'{l_ip}\', {l_port},\'{protocol}\'),'.format(**data)
 	values += s
 	
-	if (i > 0 and i % 5000) == 0:
+	if i > 0 and (i % 5000) == 0:
 		insert = sql + values[:-1]
 		insertIntoDB(insert)
 		values = ''
