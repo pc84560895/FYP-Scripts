@@ -8,8 +8,8 @@ mkdir ~/HOSTTools
 cd ~/HOSTTools
 
 #create honeypot directory
-mkdir honeypots
-cd honeypots
+#mkdir Honeypots
+#cd Honeypots
 
 #create database for filtered logs
 #cp ~/FYP-Scripts/honeypotlogsdb.py .
@@ -17,7 +17,7 @@ cd honeypots
 #rm honeypotlogsdb.py
 
 #Install MySQL-python
-pip install MySQL-python
+#pip install MySQL-python
 
 # cowrie docker file
 #docker pull ouspg/cowrie
@@ -25,3 +25,8 @@ pip install MySQL-python
 # kippo docker file
 #docker pull tomdesinto/kippo
 
+# Install splunk forwarder
+wget "https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=6.6.2&product=universalforwarder&filename=splunkforwarder-6.6.2-4b804538c686-linux-2.6-amd64.deb&wget=true" -O splunkuf
+dpkg -i splunkuf
+rm -rf splunkuf
+/opt/splunkforwarder/bin/splunk enable boot-start --accept-license
