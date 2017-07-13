@@ -1,0 +1,12 @@
+Splunk dashboard extra Apps:
+Missle Map - https://splunkbase.splunk.com/app/3511/
+
+Splunk sourcetype:
+dionaealogs - for dionaeaconn.log
+dionaeaoffers - for dionaeaoffers.log
+honeypylogs - for honeypy.log.*
+
+Splunk extra fields:
+dionaealogs - Local_Port, Protocol, Remote_IP, Service
+dionaeaoffers - URL
+honeypylogs - Protocol, Remote_IP, Service
