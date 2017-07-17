@@ -5,7 +5,7 @@
       <title>Total Hits (All Time)</title>
       <single>
         <search>
-          <query>sourcetype="honeypylogs" Remote_IP = "*" | stats count as "Total Hits"</query>
+          <query>sourcetype="honeypy.log" Remote_IP = "*" | stats count as "Total Hits"</query>
           <earliest>0</earliest>
           <sampleRatio>1</sampleRatio>
         </search>
@@ -32,7 +32,7 @@
       <title>Unique Attackers (All Time)</title>
       <single>
         <search>
-          <query>sourcetype="honeypylogs"  | stats dc(Remote_IP)</query>
+          <query>sourcetype="honeypy.log"  | stats dc(Remote_IP)</query>
           <earliest>0</earliest>
           <sampleRatio>1</sampleRatio>
         </search>
@@ -59,7 +59,7 @@
       <title>Protocols (Last 24 Hours)</title>
       <chart>
         <search>
-          <query>sourcetype="honeypylogs"| timechart count by Protocol limit=10</query>
+          <query>sourcetype="honeypy.log"| timechart count by Protocol limit=10</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
@@ -98,7 +98,7 @@
       <title>Hits from Remote_IP (Last 24 Hours)</title>
       <table>
         <search>
-          <query>sourcetype="honeypylogs"  | iplocation Remote_IP | stats count as "Hits" by Remote_IP Country | sort - Hits</query>
+          <query>sourcetype="honeypy.log"  | iplocation Remote_IP | stats count as "Hits" by Remote_IP Country | sort - Hits</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
@@ -116,7 +116,7 @@
       <title>Attacks from Location (Last 24 Hours)</title>
       <chart>
         <search>
-          <query>sourcetype="honeypylogs" | iplocation Remote_IP | stats count as "Total" by Country</query>
+          <query>sourcetype="honeypy.log" | iplocation Remote_IP | stats count as "Total" by Country</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
@@ -155,7 +155,7 @@
       <title>Services Hit (Last 24 Hours)</title>
       <chart>
         <search>
-          <query>sourcetype="honeypylogs" | stats count as "Total" by Service</query>
+          <query>sourcetype="honeypy.log" | stats count as "Total" by Service</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>

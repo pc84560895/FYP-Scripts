@@ -1,27 +1,29 @@
 #!/usr/bin/env python
 
+
+# To autorun this script, run this few commands:
+# put this script in the Dionaea deployment volume in docker. (e.g. /var/lib/docker/volumes/<Deployment_id>/_data/)
+# Run crontab -e
+# Add */5 * * * * python3 /var/lib/docker/volumes/<Deployment_id>/_data/dionaeasqlitefilter.py
+# This will run the dionaeasqlitefilter script every 5 minutes to grab the data.
+
+
 import os
 import datetime
 import sqlite3
 import requests
 
-#Hard coded for now
-sqliteDB = "/var/lib/docker/volumes/Deployment_6/_data/dionaea.sqlite"
-log_file = "/var/lib/docker/volumes/Deployment_6/_data/dionaeaconn.log"
-last_conn = "/var/lib/docker/volumes/Deployment_6/_data/lastconn.id"
-
-#sqliteDB = "dionaea.sqlite"
-#log_file = "dionaeaconn.log"
-#last_conn = "lastconn.id"
+#Deployment_id example: Deployment_6
+sqliteDB = "/var/lib/docker/volumes/<Deployment_id>/_data/dionaea.sqlite"
+log_file = "/var/lib/docker/volumes/<Deployment_id>/_data/dionaeaconn.log"
+last_conn = "/var/lib/docker/volumes/<Deployment_id>/_data/lastconn.id"
 
 conn_start = 0
 conn_id = 0
 
-#log_file2 = "dionaeaoffers.log"
-#last_offer = "lastoffer.id"
-
-log_file2 = "/var/lib/docker/volumes/Deployment_6/_data/dionaeaoffers.log"
-last_offer = "/var/lib/docker/volumes/Deployment_6/_data/lastoffer.id"
+#Deployment_id example: Deployment_6
+log_file2 = "/var/lib/docker/volumes/<Deployment_id>/_data/dionaeaoffers.log"
+last_offer = "/var/lib/docker/volumes/<Deployment_id>/_data/lastoffer.id"
 
 offer_start = 0
 offer_id = 0

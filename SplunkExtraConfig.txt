@@ -2,11 +2,19 @@ Splunk dashboard extra Apps:
 Missle Map - https://splunkbase.splunk.com/app/3511/
 
 Splunk sourcetype:
-dionaealogs - for dionaeaconn.log
-dionaeaoffers - for dionaeaoffers.log
-honeypylogs - for honeypy.log.*
+dionaeaconn.log - for dionaeaconn.log
+dionaeaoffers.log - for dionaeaoffers.log
+honeypy.logs - for honeypy.log
 
 Splunk extra fields:
-dionaealogs - Local_Port, Protocol, Remote_IP, Service
-dionaeaoffers - URL
-honeypylogs - Protocol, Remote_IP, Service
+dionaealogs:
+    Local_Port, 
+    Protocol, 
+    Remote_IP, 
+    Service
+dionaeaoffers:
+    URL
+honeypy.log: 
+    Protocol Regex: ^(?:[^ \n]* ){4,5}(?P<Protocol>\w{3})\s 
+    Remote_IP
+    Service
