@@ -29,7 +29,8 @@ cd ~/HOSTTools
 pip install requests
 
 # Install splunk forwarder
-dpkg -i splunkuf
-rm -rf splunkuf
+wget 'https://github.com/pc84560895/FYP-Scripts/blob/master/splunkuf.deb?raw=true' -O splunkuf.deb
+dpkg -i splunkuf.deb
+rm -rf splunkuf.deb
 /opt/splunkforwarder/bin/splunk enable boot-start --accept-license
 /opt/splunkforwarder/bin/splunk start --accept-license
