@@ -29,7 +29,7 @@ cd ~/HOSTTools
 pip install requests
 
 # Install splunk forwarder
-wget "https://www.splunk.com/bin/splunk/DownloadActivityServlet?architecture=x86_64&platform=linux&version=6.6.2&product=universalforwarder&filename=splunkforwarder-6.6.2-4b804538c686-linux-2.6-amd64.deb&wget=true" -O splunkuf
 dpkg -i splunkuf
 rm -rf splunkuf
 /opt/splunkforwarder/bin/splunk enable boot-start --accept-license
+/opt/splunkforwarder/bin/splunk start --accept-license
