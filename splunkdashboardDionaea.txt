@@ -5,7 +5,7 @@
       <title>Total Hits (All Time)</title>
       <single>
         <search>
-          <query>sourcetype=dionaealogs Remote_IP = "*" | stats count as "Total Hits"</query>
+          <query>sourcetype=dionaeaconn.log Remote_IP = "*" | stats count as "Total Hits"</query>
           <earliest>0</earliest>
           <sampleRatio>1</sampleRatio>
         </search>
@@ -33,7 +33,7 @@
       <title>Unique Attackers (All Time)</title>
       <single>
         <search>
-          <query>sourcetype="dionaealogs" | stats dc(Remote_IP)</query>
+          <query>sourcetype="dionaeaconn.log" | stats dc(Remote_IP)</query>
           <earliest>0</earliest>
           <sampleRatio>1</sampleRatio>
         </search>
@@ -60,7 +60,7 @@
       <title>Protocols (Last 24 Hours)</title>
       <chart>
         <search>
-          <query>sourcetype="dionaealogs" | timechart count by Protocol</query>
+          <query>sourcetype="dionaeaconn.log" | timechart count by Protocol</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
@@ -99,7 +99,7 @@
       <title>Events (Last 24 hours)</title>
       <chart>
         <search>
-          <query>sourcetype="dionaealogs" | timechart count as "Events"</query>
+          <query>sourcetype="dionaeaconn.log" | timechart count as "Events"</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
@@ -139,7 +139,7 @@
       <title>Hits from Remote_IP (Last 24 Hours)</title>
       <table>
         <search>
-          <query>sourcetype="dionaealogs" | iplocation Remote_IP | stats count as "Hits" by Remote_IP Country | sort - Hits</query>
+          <query>sourcetype="dionaeaconn.log" | iplocation Remote_IP | stats count as "Hits" by Remote_IP Country | sort - Hits</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
@@ -157,7 +157,7 @@
       <title>Attacks from Location (Last 24 Hours)</title>
       <chart>
         <search>
-          <query>sourcetype="dionaealogs" | iplocation Remote_IP | stats count as "Total" by Country</query>
+          <query>sourcetype="dionaeaconn.log" | iplocation Remote_IP | stats count as "Total" by Country</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
@@ -194,7 +194,7 @@
       <title>Top URLs Captured (All Time)</title>
       <table>
         <search>
-          <query>sourcetype="dionaeaoffers" | stats count as "Total" by URL | sort - Total</query>
+          <query>sourcetype="dionaeaoffers.log" | stats count as "Total" by URL | sort - Total</query>
           <earliest>0</earliest>
           <sampleRatio>1</sampleRatio>
         </search>
@@ -213,7 +213,7 @@
       <title>Services Hit (Last 24 Hours)</title>
       <chart>
         <search>
-          <query>sourcetype="dionaealogs" | stats count as Total by Service</query>
+          <query>sourcetype="dionaeaconn.log" | stats count as Total by Service</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
@@ -250,7 +250,7 @@
       <title>Top Ports (Last 24 Hours)</title>
       <chart>
         <search>
-          <query>sourcetype="dionaealogs" | stats count as "Total" by Local_Port</query>
+          <query>sourcetype="dionaeaconn.log" | stats count as "Total" by Local_Port</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>
@@ -289,7 +289,7 @@
       <title>10 Most Recent Attacks (Location)</title>
       <viz type="missile_map.missile_map">
         <search>
-          <query>sourcetype="dionaealogs" | iplocation Remote_IP | rename lat as start_lat,lon as start_lon | iplocation Local_IP | rename lat as end_lat, lon as end_lon | table start_lat start_lon end_lat end_lon | head 10 | eval animate="true", pulse_at_start="true"</query>
+          <query>sourcetype="dionaeaconn.log" | iplocation Remote_IP | rename lat as start_lat,lon as start_lon | iplocation Local_IP | rename lat as end_lat, lon as end_lon | table start_lat start_lon end_lat end_lon | head 10 | eval animate="true", pulse_at_start="true"</query>
           <earliest>-24h@h</earliest>
           <latest>now</latest>
           <sampleRatio>1</sampleRatio>

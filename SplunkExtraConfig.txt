@@ -10,7 +10,8 @@ Splunk extra fields:
 dionaealogs:
     Local_Port, 
     Protocol, 
-    Remote_IP, 
+    Remote_IP,
+    Local_IP, 
     Service
 dionaeaoffers:
     URL
