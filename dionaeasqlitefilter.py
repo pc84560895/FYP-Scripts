@@ -15,6 +15,8 @@ import requests
 
 #Deployment_id example: Deployment_6
 sqliteDB = "/var/lib/docker/volumes/<Deployment_id>/_data/dionaea.sqlite"
+
+#Deployment_id example: Deployment_6
 log_file = "/var/lib/docker/volumes/<Deployment_id>/_data/dionaeaconn.log"
 last_conn = "/var/lib/docker/volumes/<Deployment_id>/_data/lastconn.id"
 
@@ -27,6 +29,20 @@ last_offer = "/var/lib/docker/volumes/<Deployment_id>/_data/lastoffer.id"
 
 offer_start = 0
 offer_id = 0
+
+#Deployment_id example: Deployment_6
+log_file3 = "/var/lib/docker/volumes/<Deployment_id>/_data/dionaeadownloads.log"
+last_download = "/var/lib/docker/volumes/<Deployment_id>/_data/lastdownload.id"
+
+download_start = 0
+download_id = 0
+
+#Deployment_id example: Deployment_6
+log_file4 = "/var/lib/docker/volumes/<Deployment_id>/_data/dionaeavirustotals.log"
+last_virustotals = "/var/lib/docker/volumes/<Deployment_id>/_data/lastvirustotals.id"
+
+virustotals_start = 0
+virustotals_id = 0
 
 l_ip = requests.get("http://ipinfo.io").json().get('ip')
 
@@ -55,7 +71,7 @@ if os.path.isfile(sqliteDB):
         r_ip = row[9][7:]
         r_port = row[11]
         hostname = row[10]
-        with open(log_file, "a+") as f:
+        with open(log_file, 'a+') as f:
             f.write("{} : {:10} \t {:10} \t {} \t {} \t {} \t {:15} \t {:5} \t {}\n".format(timestamp, connection_type, connection_protocol, protocol, l_ip, l_port, r_ip, r_port, hostname))
 
     conn.close()
@@ -82,13 +98,65 @@ if os.path.isfile(sqliteDB):
         timestamp = datetime.datetime.fromtimestamp(row[3]).strftime('%Y-%m-%d %H:%M:%S')
         offer_id = row[0]
         offer_url = row[2]
-        with open(log_file2, "a+") as f:
+        with open(log_file2, 'a+') as f:
             f.write("{} : {}\n".format(timestamp, offer_url))
     conn.close()
 
     if offer_id > 0:
         with open(last_offer, 'w+') as f:
             f.write(str(offer_id))
+#End of offers table
 
+#Start of extracting data out of downloads table
+#Because i was unable to get a malware downloaded with download_url next to it, that field won't be extracted
+
+    if os.path.isfile(last_download):
+        with open(last_download, 'r') as f:
+            line = int(f.read())
+            if line > 0:
+                download_start = line
+
+    conn = sqlite3.connect(sqliteDB)
+    cursor = conn.cursor()
+    sqlstmt = "SELECT download, d.connection, connection_timestamp, download_md5_hash FROM downloads d, connections c WHERE c.connection = d.connection AND download > {} ORDER BY download ASC".format(download_start)
+    cursor.execute(sqlstmt)
+
+    for i,row in enumerate(cursor):
+        timestamp = datetime.datetime.fromtimestamp(row[2]).strftime('%Y-%m-%d %H:%M:%S')
+        download_id = row[0]
+        download_md5_hash = row[3]
+        with open(log_file3, 'a+') as f:
+            f.write("{} : {}\n".format(timestamp, download_md5_hash))
+    conn.close()
+
+    if download_id > 0:
+        with open(last_download, 'w+') as f:
+            f.write(str(download_id))
+#end of downloads table
+
+#Start of extracting data out of virustotals table
+    if os.path.isfile(last_virustotals):
+        with open(last_virustotals, 'r') as f:
+            line = int(f.read())
+            if line > 0:
+                virustotals_start = line
+
+    conn = sqlite3.connect(sqliteDB)
+    cursor = conn.cursor()
+    sqlstmt = "SELECT virustotal, virustotal_md5_hash, virustotal_timestamp, virustotal_permalink FROM virustotals WHERE virustotal > {} ORDER BY virustotal ASC".format(virustotals_start)
+    cursor.execute(sqlstmt)
+
+    for i,row in enumerate(cursor):
+        virustotal_timestamp = datetime.datetime.fromtimestamp(row[2]).strftime('%Y-%m-%d %H:%M:%S')
+        virustotals_id = row[0]
+        virustotal_md5_hash = row[1]
+        virustotal_permalink = row[3]
+        with open(log_file4, 'a+') as f:
+            f.write("{} : {:32} \t {}\n".format(virustotal_timestamp, virustotal_md5_hash, virustotal_permalink))
+    conn.close()
+
+    if virustotals_id > 0:
+        with open(last_virustotals, 'w+') as f:
+            f.write(str(virustotals_id))
 else:
     print("Sqlite DB not found: {}".format(sqliteDB))
