@@ -29,7 +29,7 @@
       </single>
     </panel>
     <panel>
-      <title>Unique Attackers</title>
+      <title>Unique Attackers (All Time)</title>
       <single>
         <search>
           <query>sourcetype="cowrie.json" | stats dc(src_ip)</query>
@@ -150,6 +150,95 @@
         <option name="trellis.scales.shared">1</option>
         <option name="trellis.size">medium</option>
       </chart>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Top Usernames (All Time)</title>
+      <table>
+        <search>
+          <query>sourcetype="cowrie.json" | stats count as "Total" by username | sort - Total</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <title>Top Password (All Time)</title>
+      <table>
+        <search>
+          <query>sourcetype="cowrie.json" | stats count as "Total" by password | sort - Total</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <title>Top Username/Password Combination (All Time)</title>
+      <table>
+        <search>
+          <query>sourcetype="cowrie.json" | stats count by username, password | rename count as "Total" | sort - Total</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Top SSH Library Version (All Time)</title>
+      <table>
+        <search>
+          <query>sourcetype="cowrie.json" | stats count as "Total" by version | sort - "Total"</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <title>Top commands (All Time)</title>
+      <table>
+        <search>
+          <query>sourcetype="cowrie.json" "Command found" | rex field=message "Command found:(?&lt;Commands&gt;.*)" | stats count as "Total" by Commands | sort - Total</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
     </panel>
   </row>
 </dashboard>
