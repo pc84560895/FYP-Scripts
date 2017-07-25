@@ -4,8 +4,9 @@
 # To autorun this script, run this few commands:
 # put this script in the Dionaea deployment volume in docker. (e.g. /var/lib/docker/volumes/<Deployment_id>/_data/)
 # Run crontab -e
-# Add */5 * * * * python3 /var/lib/docker/volumes/<Deployment_id>/_data/dionaeasqlitefilter.py
+# Add */5 * * * * python3 /var/lib/docker/volumes/Deployment_<id>_Logs/_data/dionaeasqlitefilter.py
 # This will run the dionaeasqlitefilter script every 5 minutes to grab the data.
+# Note: type out the line manually to crontab instead of copying it there if crontab does not run
 
 
 import os
@@ -13,33 +14,33 @@ import datetime
 import sqlite3
 import requests
 
-#Deployment_id example: Deployment_6
-sqliteDB = "/var/lib/docker/volumes/<Deployment_id>/_data/dionaea.sqlite"
+#Deployment_id example: Deployment_6_Logs
+sqliteDB = "/var/lib/docker/volumes/Deployment_<id>_Logs/_data/dionaea.sqlite"
 
-#Deployment_id example: Deployment_6
-log_file = "/var/lib/docker/volumes/<Deployment_id>/_data/dionaeaconn.log"
+#Deployment_id example: Deployment_6_Logs
+log_file = "/var/lib/docker/volumes/Deployment_<id>_Logs/_data/dionaeaconn.log"
 last_conn = "/var/lib/docker/volumes/<Deployment_id>/_data/lastconn.id"
 
 conn_start = 0
 conn_id = 0
 
-#Deployment_id example: Deployment_6
-log_file2 = "/var/lib/docker/volumes/<Deployment_id>/_data/dionaeaoffers.log"
-last_offer = "/var/lib/docker/volumes/<Deployment_id>/_data/lastoffer.id"
+#Deployment_id example: Deployment_6_Logs
+log_file2 = "/var/lib/docker/volumes/Deployment_<id>_Logs/_data/dionaeaoffers.log"
+last_offer = "/var/lib/docker/volumes/Deployment_<id>_Logs/_data/lastoffer.id"
 
 offer_start = 0
 offer_id = 0
 
-#Deployment_id example: Deployment_6
-log_file3 = "/var/lib/docker/volumes/<Deployment_id>/_data/dionaeadownloads.log"
-last_download = "/var/lib/docker/volumes/<Deployment_id>/_data/lastdownload.id"
+#Deployment_id example: Deployment_6_Logs
+log_file3 = "/var/lib/docker/volumes/Deployment_<id>_Logs/_data/dionaeadownloads.log"
+last_download = "/var/lib/docker/volumes/Deployment_<id>_Logs/_data/lastdownload.id"
 
 download_start = 0
 download_id = 0
 
-#Deployment_id example: Deployment_6
-log_file4 = "/var/lib/docker/volumes/<Deployment_id>/_data/dionaeavirustotals.log"
-last_virustotals = "/var/lib/docker/volumes/<Deployment_id>/_data/lastvirustotals.id"
+#Deployment_id example: Deployment_6_Logs
+log_file4 = "/var/lib/docker/volumes/Deployment_<id>_Logs/_data/dionaeavirustotals.log"
+last_virustotals = "/var/lib/docker/volumes/Deployment_<id>_Logs/_data/lastvirustotals.id"
 
 virustotals_start = 0
 virustotals_id = 0

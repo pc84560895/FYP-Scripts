@@ -7,14 +7,21 @@ dionaeaoffers.log - for dionaeaoffers.log
 honeypy.logs - for honeypy.log
 
 Splunk extra fields:
-dionaealogs:
+dionaeaconn.log:
     Local_Port, 
     Protocol, 
     Remote_IP,
     Local_IP, 
     Service
-dionaeaoffers:
+dionaeaoffers.log:
     URL
+dionaeavirustotals.log:
+    Analysistimestamp,
+    Virustotalmd5,
+    Virustotallink
+dionaeadownloads.log:
+    Capturedtimestamp,
+    Downloadmd5
 honeypy.log: 
     Protocol Regex: ^(?:[^ \n]* ){4,5}(?P<Protocol>\w{3})\s 
     Remote_IP

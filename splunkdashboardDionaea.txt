@@ -286,6 +286,62 @@
   </row>
   <row>
     <panel>
+      <title>Captured Malware</title>
+      <table>
+        <search>
+          <query>sourcetype="dionaeadownloads.log"  | table Capturedtimestamp, Downloadmd5 | sort - Capturedtimestamp</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+    <panel>
+      <title>Top malware captured</title>
+      <table>
+        <search>
+          <query>sourcetype="dionaeadownloads.log"  | stats count as "Total" by Downloadmd5 | sort - Total</query>
+          <earliest>0</earliest>
+          <latest></latest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Virustotal submissions (All Time)</title>
+      <table>
+        <search>
+          <query>sourcetype="dionaeavirustotals.log" | table Analysistimestamp, Virustotalmd5, Virustotallink | sort - Analysistimestamp</query>
+          <earliest>0</earliest>
+          <sampleRatio>1</sampleRatio>
+        </search>
+        <option name="count">10</option>
+        <option name="dataOverlayMode">none</option>
+        <option name="drilldown">none</option>
+        <option name="percentagesRow">false</option>
+        <option name="rowNumbers">false</option>
+        <option name="totalsRow">false</option>
+        <option name="wrap">true</option>
+      </table>
+    </panel>
+  </row>
+  <row>
+    <panel>
       <title>10 Most Recent Attacks (Location)</title>
       <viz type="missile_map.missile_map">
         <search>
