@@ -6,13 +6,16 @@ dionaeaconn.log - for dionaeaconn.log
 dionaeaoffers.log - for dionaeaoffers.log
 honeypy.logs - for honeypy.log
 
+Note: All the fields need to be extracted individually
+
 Splunk extra fields:
 dionaeaconn.log:
-    Local_Port, 
-    Protocol, 
-    Remote_IP,
-    Local_IP, 
-    Service
+    Service,
+    Protocol,
+    Local_IP,
+    Local_Port,  
+    Remote_IP
+
 dionaeaoffers.log:
     URL
 dionaeavirustotals.log:
