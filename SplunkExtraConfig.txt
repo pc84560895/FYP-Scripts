@@ -5,27 +5,31 @@ Splunk sourcetype:
 dionaeaconn.log - for dionaeaconn.log
 dionaeaoffers.log - for dionaeaoffers.log
 honeypy.logs - for honeypy.log
+cowrie.json - for cowrie.json (Since cowrie is in json format, there is not a need to extract extra fields)
 
 Note: All the fields need to be extracted individually
 
 Splunk extra fields:
 dionaeaconn.log:
-    Service,
-    Protocol,
-    Local_IP,
-    Local_Port,  
-    Remote_IP
+    Service, Regex: ^[^\t\n]*\t\s+(?P<Service>\w+)
+    Protocol, Regex: ^(?:[^\t\n]*\t){2}\s+(?P<Protocol>\w+)
+    Local_IP, Regex: ^(?:[^\t\n]*\t){3}\s+(?P<Local_IP>[^ ]+)
+    Local_Port, Regex: ^(?:[^\t\n]*\t){4}\s+(?P<Local_Port>\d+)
+    Remote_IP, Regex: ^(?:[^\t\n]*\t){5}\s+(?P<Remote_IP>[^ ]+)
 
 dionaeaoffers.log:
-    URL
+    URL, Regex: ^(?:[^ \n]* ){3}(?P<URL>.+)
+
 dionaeavirustotals.log:
-    Analysistimestamp,
-    Virustotalmd5,
-    Virustotallink
+    Analysistimestamp, Regex: ^(?P<Analysistimestamp>\d+\-\d+\-\d+\s+\d+:\d+:\d+)
+    Virustotalmd5, Regex: ^(?:[^ \n]* ){3}(?P<Virustotalmd5>[^ ]+)
+    Virustotallink, Regex: ^[^\t\n]*\t\s+(?P<Virustotallink>.+)
+
 dionaeadownloads.log:
-    Capturedtimestamp,
-    Downloadmd5
+    Capturedtimestamp, Regex: ^(?P<Capturedtimestamp>\d+\-\d+\-\d+\s+\d+:\d+:\d+)
+    Downloadmd5, Regex: ^(?:[^ \n]* ){3}(?P<Downloadmd5>.+)
+
 honeypy.log: 
-    Protocol Regex: ^(?:[^ \n]* ){4,5}(?P<Protocol>\w{3})\s 
-    Remote_IP
-    Service
+    Protocol, Regex: ^(?:[^ \n]* ){4,5}(?P<Protocol>\w{3})\s
+    Remote_IP, Regex: ^(?:[^ \n]* ){9}(?P<Remote_IP>[^ ]+) 
+    Service, Regex: ^(?:[^ \n]* ){8}(?P<Service>\w+)
