@@ -15,31 +15,40 @@ import sqlite3
 import requests
 
 #Deployment_id example: Deployment_6_Logs
+#REQUIRED TO CHANGE
 sqliteDB = "/var/lib/docker/volumes/Deployment_<id>_Logs/_data/dionaea.sqlite"
 
 #Deployment_id example: Deployment_6_Logs
+#REQUIRED TO CHANGE
 log_file = "/var/lib/docker/volumes/Deployment_<id>_Logs/_data/dionaeaconn.log"
+#REQUIRED TO CHANGE
 last_conn = "/var/lib/docker/volumes/<Deployment_id>/_data/lastconn.id"
 
 conn_start = 0
 conn_id = 0
 
 #Deployment_id example: Deployment_6_Logs
+#REQUIRED TO CHANGE
 log_file2 = "/var/lib/docker/volumes/Deployment_<id>_Logs/_data/dionaeaoffers.log"
+#REQUIRED TO CHANGE
 last_offer = "/var/lib/docker/volumes/Deployment_<id>_Logs/_data/lastoffer.id"
 
 offer_start = 0
 offer_id = 0
 
 #Deployment_id example: Deployment_6_Logs
+#REQUIRED TO CHANGE
 log_file3 = "/var/lib/docker/volumes/Deployment_<id>_Logs/_data/dionaeadownloads.log"
+#REQUIRED TO CHANGE
 last_download = "/var/lib/docker/volumes/Deployment_<id>_Logs/_data/lastdownload.id"
 
 download_start = 0
 download_id = 0
 
 #Deployment_id example: Deployment_6_Logs
+#REQUIRED TO CHANGE
 log_file4 = "/var/lib/docker/volumes/Deployment_<id>_Logs/_data/dionaeavirustotals.log"
+#REQUIRED TO CHANGE
 last_virustotals = "/var/lib/docker/volumes/Deployment_<id>_Logs/_data/lastvirustotals.id"
 
 virustotals_start = 0
