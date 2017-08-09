@@ -22,7 +22,7 @@ sqliteDB = "/var/lib/docker/volumes/Deployment_<id>_Logs/_data/dionaea.sqlite"
 #REQUIRED TO CHANGE
 log_file = "/var/lib/docker/volumes/Deployment_<id>_Logs/_data/dionaeaconn.log"
 #REQUIRED TO CHANGE
-last_conn = "/var/lib/docker/volumes/<Deployment_id>/_data/lastconn.id"
+last_conn = "/var/lib/docker/volumes/Deployment_<id>_Logs/_data/lastconn.id"
 
 conn_start = 0
 conn_id = 0
