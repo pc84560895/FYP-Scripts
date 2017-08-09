@@ -2,7 +2,7 @@
 
 
 # To autorun this script, run this few commands:
-# put this script in the Dionaea deployment volume in docker. (e.g. /var/lib/docker/volumes/<Deployment_id>/_data/)
+# put this script in the Dionaea deployment volume in docker. (e.g. /var/lib/docker/volumes/Deployment_<id>_Logs/_data/)
 # Run crontab -e
 # Add */5 * * * * python3 /var/lib/docker/volumes/Deployment_<id>_Logs/_data/dionaeasqlitefilter.py
 # This will run the dionaeasqlitefilter script every 5 minutes to grab the data.
