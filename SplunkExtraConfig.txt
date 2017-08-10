@@ -31,5 +31,5 @@ dionaeadownloads.log:
 
 honeypy.log: 
     Protocol, Regex: ^(?:[^ \n]* ){4,5}(?P<Protocol>\w{3})\s
-    Remote_IP, Regex: ^(?:[^ \n]* ){9}(?P<Remote_IP>[^ ]+) 
+    Remote_IP, Regex: ^(?:[^ \n]* ){9,10}(?P<Remote_IP>\d+\.\d+\.\d+\.\d+)
     Service, Regex: ^(?:[^ \n]* ){8}(?P<Service>\w+)
