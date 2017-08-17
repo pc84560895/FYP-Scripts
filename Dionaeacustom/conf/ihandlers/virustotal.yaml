@@ -1,5 +1,0 @@
-- name: virustotal
-  config:
-    # grab it from your virustotal account at My account -> Inbox -> Public API
-    apikey: "32db35468068aff29530380e6f3e3165f3ad0d4ebde6b6d55c09782d5c9e80da"
-    file: "/opt/dionaea/var/dionaea/vtcache.sqlite"
